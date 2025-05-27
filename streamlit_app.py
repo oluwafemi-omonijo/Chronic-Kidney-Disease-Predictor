@@ -6,7 +6,7 @@ import joblib
 
 # 🛠 Page settings
 st.set_page_config(page_title="CKD Risk Predictor", layout="centered")
-st.title("🩺 Chronic Kidney Disease (CKD) Risk Predictor")
+st.title("🩺 Chronic Kidney Disease (CKD) Diagnostic app")
 st.markdown("Estimate a patient’s CKD risk using lifestyle and clinical factors. 🚑")
 
 # 🔄 Load models and scaler
@@ -99,7 +99,7 @@ encoded_input = pd.DataFrame([[
 ])
 
 # 🚦 Predict button
-if st.button("🔍 Predict CKD Risk"):
+if st.button("🔍 Diagnose CKD"):
     if "Logistic" in model_choice:
         input_scaled = scaler.transform(encoded_input)
         prob = model.predict_proba(input_scaled)[0][1]
