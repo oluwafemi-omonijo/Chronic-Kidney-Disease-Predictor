@@ -5,9 +5,9 @@ import joblib
 
 
 # 🛠 Page settings
-st.set_page_config(page_title="CKD Risk Predictor", layout="centered")
+st.set_page_config(page_title="CKD Diagnostics", layout="centered")
 st.title("🩺 Chronic Kidney Disease (CKD) Diagnostic app")
-st.markdown("Estimate a patient’s CKD risk using lifestyle and clinical factors. 🚑")
+st.markdown("Estimate a patient’s CKD diagnosis using lifestyle and clinical factors. 🚑")
 
 # 🔄 Load models and scaler
 xgb_model = joblib.load("xgboost_ckd_smote.pkl")
