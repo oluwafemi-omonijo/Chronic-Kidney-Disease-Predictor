@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c98fa384-7afa-4ea5-8841-8eae5ad1a68d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logistic_regression_ckd_smote_auc_0.9479.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/random_forest_ckd_smote.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scaler_ckd.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/streamlit_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/streamlit_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xgboost_ckd_smote.pkl" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
