@@ -7,8 +7,10 @@ st.set_page_config(page_title="CKD Risk Predictor", layout="centered")
 st.title("🩺 Chronic Kidney Disease (CKD) Risk Predictor")
 st.markdown("Estimate a patient's risk of CKD using clinical and lifestyle information. 🚑")
 
-# 🔄 Load Model
+# 🔄 Load model and schema
 model = joblib.load("random_forest_ckd_model.pkl")
+expected_features = joblib.load("model_features.pkl")  # list of features used in training
+# scaler = joblib.load("scaler_ckd.pkl")  # Only needed for models that require scaling
 
 # 🧾 Patient Inputs
 st.markdown("## 🔎 Patient Information")
@@ -38,7 +40,7 @@ with col2:
     pallor = st.selectbox("Pallor", ["Yes", "No"])
     herbal_meds = st.selectbox("Herbal Medication Use", ["Yes", "No"])
 
-# Clinical measurements
+# 🧪 Clinical Measurements
 st.markdown("## 🧪 Clinical Measurements")
 SBP = st.slider("Systolic BP (SBP)", 90, 200, 130)
 DBP = st.slider("Diastolic BP (DBP)", 60, 120, 80)
@@ -56,7 +58,7 @@ ethnicity_map = {
 }
 eth_encoded = ethnicity_map[ethnicity]
 
-input_df = pd.DataFrame([[
+input_data = pd.DataFrame([[
     age,
     1 if gender == "Male" else 0,
     {"Low": 0, "Middle": 1, "High": 2}[socio],
@@ -77,9 +79,16 @@ input_df = pd.DataFrame([[
     'Ethnicity_Black', 'Ethnicity_White', 'Ethnicity_Other'
 ])
 
+# Align with expected features
+for col in expected_features:
+    if col not in input_data.columns:
+        input_data[col] = 0
+input_data = input_data[expected_features]
+
 # 🚀 Prediction
 if st.button("🔍 Predict CKD Risk"):
-    prob = model.predict_proba(input_df)[0][1]
+    # input_data = scaler.transform(input_data)  # Uncomment if model requires scaling
+    prob = model.predict_proba(input_data)[0][1]
     st.markdown(f"<h2 style='color:#EF476F;'>CKD Risk: {prob:.2%}</h2>", unsafe_allow_html=True)
     st.info("Model: Random Forest (AUC: 0.85)")
 
@@ -91,3 +100,4 @@ if st.button("🔍 Predict CKD Risk"):
 # Footer
 st.markdown("---")
 st.markdown("<center><sub>Part of the NCD Risk Suite • Built by Oluwafemi</sub></center>", unsafe_allow_html=True)
+
